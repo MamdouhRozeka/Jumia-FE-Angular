@@ -1,0 +1,60 @@
+
+
+<div class="panel panel-primary">
+  <mat-form-field>
+    <mat-label>Country</mat-label>
+        <mat-select  [(ngModel)]="selectedCountry" (ngModelChange)="onCountryChange($event)">
+          <mat-option [value]= null>None</mat-option>
+         <mat-option *ngFor="let country of countries | async" [value]="country.label">
+         {{country.name}}
+        </mat-option>
+    </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>State</mat-label>
+              <mat-select  [(ngModel)]="selectedState" (ngModelChange)="onStateChange($event)">
+                <mat-option [value]= null>None</mat-option>
+                <mat-option [value]= "true">Valid</mat-option>
+                <mat-option [value]= "false">InValid</mat-option>
+          </mat-select>
+              </mat-form-field>
+    <div class="panel-heading">
+      <h2>Customer List</h2>
+    </div>
+    
+    <div class="panel-body">
+
+      <table class="table table-striped table-bordered table-sm row-border hover" cellspacing="0" width="100%">
+
+        <thead>
+          <tr>
+            <th >Name</th>
+            <th >Country</th>
+            <th >Country Code</th>
+            <th >Phone</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers | async">
+            <td>{{customer.name}}</td>
+            <td>{{customer.country}}</td>
+            <td>{{customer.countryCode}}</td>
+            <td>{{customer.phone}}</td>
+            <td *ngIf="customer.state" [ngStyle]="{'color':'green'}">Valid</td>
+            <td *ngIf="!customer.state" [ngStyle]="{'color':'red'}">InValid</td>
+            
+              <!-- <td><button style='margin-right:16px' (click)="deleteEmployee(employee.id)" class="btn btn-danger">Delete</button>
+                <button style='margin-right:16px' (click)="updateEmployee(employee.id)" class="btn btn-success" style="margin-left: 10px">Edit details</button>
+              </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+    
+    
